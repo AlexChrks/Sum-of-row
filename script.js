@@ -2,29 +2,25 @@ function range() {
   const memory = {};
   return function (min,max) {
     
+    if (typeof min !== 'number' 
+      || typeof max !== 'number' 
+      || Number.isNaN(min) 
+      || Number.isNaN(max)    
+      || !Number.isInteger(min) 
+      || !Number.isInteger(max)
+      || min < 1 
+      || max < 2) {
+        throw new TypeError('Wrong range! Use positive numbers. First number in range should be less than second number.');
+    }
+    
     if (memory[[min,max]]) {
       console.log(`from memory: ${memory[[min,max]]}` );
       return memory[[min,max]];
     } else {
-      if (typeof min !== 'number' || typeof max !== 'number') {
-        throw new TypeError('Type of input should be number');
-      } else if (Number.isNaN(min) || Number.isNaN(max)) {
-        throw new TypeError('Type of input should not be NaN');
-      } else if (!Number.isInteger(min) || !Number.isInteger(max) ) {
-        throw new TypeError('Type of input is not integer number');
-      } else if (min < 1 || max < 2) {
-        throw new TypeError('Wrong range. Numbers should be positive. Second number should be greater than first');
-      } else {
-        let sumOfRange = 0;
-        if (min > 1) {
-          sumOfRange = (max * (max + 1) / 2) - ((min-1) * ((min-1) + 1) / 2);
-        } else {
-          sumOfRange = (max * (max + 1) / 2);
-        }
-        memory[[min,max]] = sumOfRange;
-        console.log(sumOfRange);
-        return sumOfRange;
-      }
+      let sumOfRange = ((max - min) + 1) * (min + max) / 2;
+      memory[[min,max]] = sumOfRange;
+      console.log(sumOfRange);
+      return sumOfRange;  
     }
   }
 }
