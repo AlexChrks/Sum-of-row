@@ -3,9 +3,7 @@ function range() {
   return function (min,max) {
     
     if (typeof min !== 'number' 
-      || typeof max !== 'number' 
-      || Number.isNaN(min) 
-      || Number.isNaN(max)    
+      || typeof max !== 'number'   
       || !Number.isInteger(min) 
       || !Number.isInteger(max)
       || min < 1 
